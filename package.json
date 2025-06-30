@@ -1,0 +1,23 @@
+{
+  "name": "ada-tp-integrador",
+  "version": "1.0.0",
+  "main": "TP INTEGRADOR.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guadasecco/ADA-TP-INTEGRADOR.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guadasecco/ADA-TP-INTEGRADOR/issues"
+  },
+  "homepage": "https://github.com/guadasecco/ADA-TP-INTEGRADOR#readme",
+  "description": "",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}
