@@ -30,3 +30,62 @@ const usuarios = [
   { id: 9, nombre: "Ana Diaz", email: "ana.diaz@gmail.com", librosPrestados: [8, 9, 10] }, // Enero, Nuestra piel muerta y Mandibula
   { id: 10, nombre: "Lucia Rinero", email: "lucia.rinero@gmail.com", librosPrestados: [5, 8] } //Nuestra parte de noche y Enero 
 ];
+
+
+
+//PUNTO 3: GESTION DE USUARIOS
+// a) Implementar una función registrarUsuario(nombre, email) que agregue un nuevo usuario al array usuarios.
+ //b) Implementar una función mostrarTodosLosUsuarios() que me devuelva el array completo de usuarios
+// c) Crear una función buscarUsuario(email) que devuelva la información de un usuario dado su email.
+// d) Implementar una función borrarUsuario(nombre, email) que elimine el usuario seleccionado.
+
+
+//a) REGISTRANDO USUARIOS
+
+function registratUsuario(nombre, email) {
+  const nuevoId = usuarios.length > 0 ? usuarios[usuarios.length - 1].id + 1 : 1;
+  const nuevoUsuario = {
+    id: nuevoId,
+    nombre: nombre.trim(),
+    email: email.trim().toLowerCase(),
+    librosPrestados: []
+  }
+  usuarios.push(nuevoUsuario);
+  console.log("Usuario" + nombre + "registrado con éxito");
+}
+
+//b) USUARIOS REGISTRADOS
+
+function todosLosUsuarios() {
+  console.log("Los usuarios registrados son:");
+
+  usuarios.forEach(function(usuario,indice) {
+  console.log( "Usuario " + (indice + 1) + ": Nombre = " + usuario.nombre + " | Email = " + usuario.email);
+});
+return usuarios;
+}
+
+//c) BUSCANDO AL USUARIO
+
+function buscarUsuario(email) {
+  const usuarioEncontrado = usuarios.find (usuario => usuario.email === email);
+  return usuarioEncontrado || "Usuario no encontrado";
+}
+
+//d) BORRAR A UN USUARIO
+
+function borrarUsuario(nombre,email) {
+  const index = usuarios.findIndex(usuario => usuario.nombre === nombre && usuario.email === email);
+  if (index !== -1) {
+    
+    const eliminado = usuarios.splice(index, 1)[0]; 
+
+    console.log("Usuario eliminado: Nombre = " + eliminado.nombre + " | Email = " + eliminado.email);
+  } else {
+    console.log("No se encontró usuario para eliminar con Nombre = " + nombre + " y Email = " + email);
+  }
+}
+
+
+
+
