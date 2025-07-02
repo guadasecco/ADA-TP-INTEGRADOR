@@ -68,6 +68,7 @@ return usuarios;
 //c) BUSCANDO AL USUARIO
 
 function buscarUsuario(email) {
+  const emailNormalizado = email.trim().toLowerCase();
   const usuarioEncontrado = usuarios.find (usuario => usuario.email === email);
   return usuarioEncontrado || "Usuario no encontrado";
 }
@@ -75,6 +76,7 @@ function buscarUsuario(email) {
 //d) BORRAR A UN USUARIO
 
 function borrarUsuario(nombre,email) {
+  const emailNormalizado = email.trim().toLowerCase();
   const index = usuarios.findIndex(usuario => usuario.nombre === nombre && usuario.email === email);
   if (index !== -1) {
     
@@ -88,4 +90,83 @@ function borrarUsuario(nombre,email) {
 
 
 
+
+//PUNTO 4 : SISTEMA DE PRESTAMOS
+//a)  Desarrollar una función prestarLibro(idLibro, idUsuario) que marque un libro como no disponible y lo agregue a la lista 
+// de libros prestados del usuario
+//b) Implementar una función devolverLibro(idLibro, idUsuario) que marque un libro como disponible y lo elimine de la lista
+//  de libros prestados del usuario
+
+//a) PRESTANDO LIBROS :)
+
+function prestarLibro(idLibro, idUsuario) {
+
+  const libro = libros.find(function(item) {
+    return item.id === idLibro;
+});
+
+const usuario = usuarios.find(function(usuarioActual) {
+  return usuarioActual.id === idUsuario;
+});
+
+if (!libro) {
+  console.log("El libro con ID " + idLibro + " no existe");
+  return;
+}
+
+if (!usuario) {
+  console.log("El usuario con ID " + idUsuario + " no existe");
+  return;
+}
+
+if (!libro.disponible) {
+  console.log("El libro " + libro.titulo + " no esta disponible ahora");
+  return;
+}
+
+libro.disponible = false;
+
+usuario.librosPrestados.push(libro.id);
+
+console.log("El libro " + libro.titulo + " fue prestado a " + usuario.nombre + "");
+
+}
+
+
+//b) DEVOLVIENDO LIBROS :)
+
+function devolverLibro(idLibro, idUsuario) {
+
+  const libro = libros.find(item => item.id === idLibro);
+  const usuario = usuarios.find(usuarioActual => usuarioActual.id === idUsuario);
+
+  if (!libro) {
+    console.log("El libro con ID " + idLibro + " no existe");
+    return;
+  }
+
+  if (!usuario) {
+    console.log("El usuario con ID " + idUsuario + " no existe");
+    return;
+  }
+
+    const indexLibro = usuario.librosPrestados.indexOf(idLibro);
+
+    if (indexLibro === -1) {
+      console.log("El usuario " + usuario.nombre + " ,no tiene el libro prestado " + libro.titulo + "");
+      return;
+    }
+
+    libro.disponible = true;
+    usuario.librosPrestados.splice(indexLibro, 1)
+
+    console.log("El libro " + libro.titulo + " ,fue devuelto por " + usuario.nombre + "");
+  }
+
+
+    
+      
+    
+   
+  
 
