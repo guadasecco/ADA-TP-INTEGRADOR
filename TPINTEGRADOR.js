@@ -39,7 +39,7 @@ const usuarios = [
 
 //CODIGO y Comentarios.
 
-const generarReporteLibros = () => {
+function generarReporteLibros() { // Función arrow sin parámetros que devuelve el reporte de libros.
   const totalLibros = libros.length; //Usamos .length para indicar cuántos elementos hay en ese array.
 
   const librosPrestados = libros.filter(
@@ -62,7 +62,7 @@ const generarReporteLibros = () => {
     libros[0]
   );
 
-  const reporte = { // Creamos el objeto de reporte
+  const reporte = { // Creamos el reporte que devuelve la función.
     totalLibros,
     librosPrestados,
     cantidadPorGenero,
@@ -91,8 +91,8 @@ console.log(ReporteDeLibros);
 
 //CODIGO y Comentarios.
 
-const librosConPalabrasEnTitulo = () => {  //Usamos funcion arrow sin parametros y con return explicito. Usamos llaves y return ya que la funcion tiene mas de una linea de codigo.
-  const titulosIdentificados = libros
+function librosConPalabrasEnTitulo() {  
+  const titulosIdentificados = libros 
     .map((libro) => libro.titulo) //Usamos .map() para recorrer el array de libros y obtener los títulos.
     .filter((titulo) => {     //Usamos .filter() para filtrar los títulos que cumplen con la condicion (más de una palabra y solo letras).
       const palabras = titulo.split(" "); // Dividimos el título en palabras usando el espacio como separador. 
@@ -108,6 +108,7 @@ const librosConPalabrasEnTitulo = () => {  //Usamos funcion arrow sin parametros
 
   return titulosIdentificados; //Devolvemos el array de títulos identificados.
 };
+
 librosConPalabrasEnTitulo();  
 
 
@@ -117,7 +118,44 @@ librosConPalabrasEnTitulo();
 
 //CODIGO y Comentario
 
-const calcularEstadisticas = () => {
-};
+function calcularEstadisticas() {  
+
+  const aniosPublicacion = libros
+    .map(libro => libro.anio); //Usamos .map() para recorrer el array de libros y obtener los años de publicación.
 
 
+  //Promedio de años de publicación
+  const sumaAnios = aniosPublicacion.reduce((acumulador, anio) => acumulador + anio, 0); //Usamos .reduce() para sumar todos los años de publicación.
+  const promedioAnios = sumaAnios / aniosPublicacion.length; //Calculamos el promedio dividiendo la suma total de años por la cantidad de libros.
+
+  console.log(`✔ Promedio de años de publicación de los libros: ${promedioAnios}`);  //Mostramos el promedio en la consola.
+
+
+  //Año de publicación más frecuente
+  const frecuenciaAnios = {}; //Creamos un objeto para contar la frecuencia de cada año de publicación. Consideraremos  los años y los valores, la cantidad de veces que aparecen.
+
+    aniosPublicacion.forEach(anio => { //Usamos forEach (objeto) para recorrer cada año de publicación
+      frecuenciaAnios[anio] = (frecuenciaAnios[anio] || 0) + 1; //Por cada año, si ya existe como clave en frecuenciaAnios, incrementamos su contador; si no existe, lo inicializamos en 1.
+  });
+
+  let anioMasFrecuente = 0; //Usamos una variable para almacenar el año más frecuente
+  let maxFrecuencia = 0; //Usamos una variable para almacenar la máxima frecuencia encontrada
+
+  for (const anio in frecuenciaAnios) {  //Recorremos las claves del objeto frecuenciaAnios
+    if (frecuenciaAnios[anio] > maxFrecuencia) {  //si encontramos una frecuencia mayor, actualizamos maxFrecuencia
+      maxFrecuencia = frecuenciaAnios[anio]; // Actualizamos la máxima frecuencia
+      anioMasFrecuente = parseInt(anio);  //Convertimos a numero, las claves de los objetos que son cadenas de texto (queremos el año como un número)    }
+  }
+  } //Al finalizar el bucle, anioMasFrecuente contendrá el año más frecuente y maxFrecuencia la cantidad de veces que aparece.
+  console.log(`✔ Año de publicación más frecuente: ${anioMasFrecuente} (aparece ${maxFrecuencia} veces)`); //Mostramos el año más frecuente y cuántas veces aparece en la consola.
+
+
+  //Diferencia en años entre el libro más antiguo y el más nuevo
+  const anioMasAntiguo = Math.min(...aniosPublicacion); //Usamos Math.min para encontrar el valor mas antiguo
+  const anioMasNuevo = Math.max(...aniosPublicacion);   //Usamos Math.max para encontrar el valor mas nuevo
+  const diferenciaAnios = anioMasNuevo - anioMasAntiguo; //Calculamos la diferencia entre el año mas nuevo y el más antiguo
+  
+  console.log(`✔ Diferencia en años entre el libro más antiguo (${anioMasAntiguo}) y el más nuevo (${anioMasNuevo}): ${diferenciaAnios} años`);  //Mostramos la diferencia en años en la consola.
+}
+
+calcularEstadisticas(); 
