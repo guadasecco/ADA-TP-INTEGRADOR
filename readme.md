@@ -15,6 +15,8 @@
 - Candela Gonzalez: ejercicio 8  
 - Lourdes Torres: ejercicio 9
 
+🔎 **Nota**: Aunque los ejercicios fueron realizados de forma individual, **la revisión y validación de todos los puntos se hizo en conjunto entre las integrantes del equipo.**
+
 ---
 # 🧩 Documentación de integración de ramas
 
