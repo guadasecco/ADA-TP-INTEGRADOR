@@ -30,3 +30,26 @@ const usuarios = [
   { id: 9, nombre: "Ana Diaz", email: "ana.diaz@gmail.com", librosPrestados: [8, 9, 10] }, // Enero, Nuestra piel muerta y Mandibula
   { id: 10, nombre: "Lucia Rinero", email: "lucia.rinero@gmail.com", librosPrestados: [5, 8] } //Nuestra parte de noche y Enero 
 ];
+//PUNTO 8: CREAR UNA FUNCION (NORMALIZARDATOS)
+//A) CONVERTIR TODOS LOS TITULOS A MAYUSCULA 
+//B) ELIMINAR ESPACIOS EN BLANCO AL INICIO Y AL FINAL DE LOS NOMBRES DE AUTORES 
+//C) FORMATEAR LOS EMAILS DE LOS USUARIOS A MINUSCULAS 
+function normalizarDatos(titulo, autor, email){
+  // Convertir título a mayúsculas
+  const tituloNormalizado = titulo.toUpperCase();
+
+  // Recortar espacios del autor
+  const autorNormalizado = autor.trim();
+
+  // Formatear email a minúsculas 
+  const emailNormalizado = email.toLowerCase();
+
+  return {
+    titulo: tituloNormalizado,
+    autor: autorNormalizado,
+    email: emailNormalizado
+  };
+}
+const resultado = normalizarDatos("titulo", "autor", "email")
+console.log(resultado)
+
