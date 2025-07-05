@@ -30,6 +30,78 @@ const usuarios = [
   { id: 9, nombre: "Ana Diaz", email: "ana.diaz@gmail.com", librosPrestados: [8, 9, 10] }, // Enero, Nuestra piel muerta y Mandibula
   { id: 10, nombre: "Lucia Rinero", email: "lucia.rinero@gmail.com", librosPrestados: [5, 8] } //Nuestra parte de noche y Enero 
 ];
+
+//PUNTO 2: FUNCIONES DE GESTION DE LIBROS
+// A- implementar FUNCION agregarLibro(id, titulo, autor, anio, genero) 
+// que agregue un nuevo libro al array libros.
+
+function agregarLibro(id, titulo, autor, anio, genero) {
+  const nuevoLibro = {
+    id,
+    titulo,
+    autor,
+    anio,
+    genero,
+    disponible: true
+  };
+  libros.push(nuevoLibro);
+  console.log("El libro fue agregado correctamente:");
+  console.log(nuevoLibro);
+}
+
+// B- Crear una FUNCION buscarLibro(criterio, valor) 
+// que permita buscar libros por título, autor o género
+// utilizando el algoritmo de búsqueda lineal.
+function buscarLibro(criterio, valor) {
+  const resultados = libros.filter(libro => {
+    return libro[criterio].toLowerCase().includes(valor.toLowerCase());
+  });
+
+  console.log(`Resultados de búsqueda por ${criterio}` = "${valor}");
+  console.log(resultados);
+}
+
+// C- Desarrollar una FUNCION ordenarLibros(criterio) 
+// que ordene los libros por título o año 
+// utilizando el algoritmo de ordenamiento burbuja (bubble sort)
+// y luego muestre los libros ordenados en la consola.
+libros[i].titulo.toLowerCase() > libros[j].titulo.toLowerCase() ;{
+          let temp = libros[i];
+          libros[i] = libros[j];
+          libros[j] = temp;
+        
+        }
+    
+
+      // Si el criterio es 'anio', comparamos como número
+      if (criterio === "anio") {
+        if (libros[i].anio > libros[j].anio) {
+          let temp = libros[i];
+          libros[i] = libros[j];
+          libros[j] = temp;
+        }
+      }
+    
+  console.log("Libros ordenados por ${criterio}:");
+  console.log(libros);
+
+
+
+// D- Desarrollar una FUNCION borrarLibro(id) 
+// que elimine el libro que se le pase por parámetro.
+
+  function borrarLibro(id) {
+  const index = libros.findIndex(libro => libro.id === id);
+  if (index !== -1) {
+    const libroEliminado = libros.splice(index, 1);
+    console.log("El libro eliminado:");
+    console.log(libroEliminado[0]);
+  } else {
+    console.log("No se encontró un libro con ese ID.");
+  }
+}
+
+
 //PUNTO 8: CREAR UNA FUNCION (NORMALIZARDATOS)
 //A) CONVERTIR TODOS LOS TITULOS A MAYUSCULA 
 //B) ELIMINAR ESPACIOS EN BLANCO AL INICIO Y AL FINAL DE LOS NOMBRES DE AUTORES 
@@ -53,3 +125,104 @@ function normalizarDatos(titulo, autor, email){
 const resultado = normalizarDatos("titulo", "autor", "email")
 console.log(resultado)
 
+//Punto 9: Interfaz de Usuario por Consola
+//a) Implementar una función menuPrincipal() que muestre un menú de
+//opciones al usuario y permita interactuar con el sistema utilizando prompt().
+//El menú debe incluir opciones para todas las funcionalidades anteriores y
+//utilizar estructuras de control (if, switch, ciclos) para manejar la lógica.*/
+
+function menuPrincipal(){
+    let opcion
+    do{
+    //Visualizacion de las opciones 
+    opcion=Number(prompt(`Introduzca la opcion que desee:
+      1- Agregar un libro
+      2- Buscar un libro
+      3- Ordenar libros segun...
+      4- Borrar libro      
+      5- Prestar libro
+      6- Devolver libro
+      7- Reporte general de libros
+      8- Libros con más de una palabra en el titulo 
+      9- Registrar un usuario
+      10- Mostrar usuarios 
+      11- Buscar usuario
+      12- Borrar Usuario
+      13- Estadistias
+      0- Salir `))
+    
+    if(isNaN(opcion)){//verificamos que el ingreso sea un número
+      console.log(`Error: se debe ingresar un número `)
+    }else{
+      switch(opcion){
+        case 1:
+            let id=Number(prompt(`Ingrese el nuevo id `));
+            let titulo=prompt(`Ingrese el titulo del libro `);
+            let autor=prompt(`Ingrese el titulo del libro `);
+            let anio=prompt(`Ingrese el año de publicacion del libro `);
+            let genero=prompt(`Ingrese el genero del libro `);
+           agregarLibro(id, titulo, autor, anio, genero);
+        break;
+        case 2: 
+            let criterio=prompt(`Por que desea buscar el libro(titulo, autor, genero, anio, id) `);
+            let valor=prompt(`Ingrese el ${criterio} que desea buscar `)           
+            buscarLibro(criterio, valor);
+        break;
+        case 3: 
+            criterio=prompt("Ingrese por que criterio desea ordenar los libros (titulo, autor, genero, anio, id)");
+            ordenarLibros(criterio); 
+        break;
+        case 4: 
+            id=prompt(`Ingrese el id del libro que desea borrar `);
+            borrarLibro(id);
+        break;
+        case 5: 
+            let idLibro=prompt(`Ingrese el id del libro que se va a prestar: `);
+            let idUsuario=prompt(`Ingrese el id del usuario que recibira el libro: `);
+            prestarLibro(idLibro, idUsuario);
+        break;
+        case 6: 
+            idLibro=prompt(`Ingrese el id del libro que se va a devolver: `);
+            idUsuario=prompt(`Ingrese el id del usuario que devuelve el libro: `);
+            devolverLibro(idLibro, idUsuario);
+        break;
+        case 7: 
+            generarReporteLibros();
+        break;
+        case 8: 
+            librosConPalabrasEnTitulo(); 
+        break;
+        case 9:
+            let nombre=(`Ingrese el nombre del usuario que desea registrar `);
+            let email=(`Ingrese el email al que estara vinculado el usuario `);
+            registrarUsuario(nombre, email); 
+        break;
+        case 10: 
+            mostrarTodosLosUsuarios();
+        break;
+        case 11: 
+            email=prompt(`Ingrese el email de usuario que busca `);
+            buscarUsuario(email);
+        break;
+        case 12:
+            nombre=prompt(`Ingrese el nombre del usuario a borrar `);
+            email=prompt(`Ingrese el email del usuario a borrar `);
+            borrarUsuario(nombre, email);
+        break;
+        case 13:
+            calcularEstadisticas();
+        break;
+        case 0:
+          console.log("Que tenga buen dia. Adios");
+        break;
+        default:
+          console.log(Error="se debe ingresar una de las opciones");
+        break;
+      }
+    }
+    }while(opcion!==0)
+}
+
+const prompt = require('prompt-sync')({ sigint: true });
+
+menuPrincipal();
