@@ -7,7 +7,15 @@
 - Lourdes Ayelén Torres Ramonell 46942894
 
 ---
+## 📌 Responsabilidades por ejercicio
 
+- Guadalupe Secco: ejercicios 1 y 2  
+- Sofía Bertolino: ejercicios 3 y 4  
+- Micaela Asinari: ejercicios 5, 6 y 7  
+- Candela Gonzalez: ejercicio 8  
+- Lourdes Torres: ejercicio 9
+
+---
 # 🧩 Documentación de integración de ramas
 
 Durante el desarrollo del proyecto se trabajó en tres ramas principales:
